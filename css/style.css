@@ -1,5 +1,12 @@
-```css
 :root {
+  /*
+   * Wichtig:
+   * Die Seite soll IMMER im hellen Farbschema dargestellt werden.
+   * Dadurch verhindert man automatische Dark-Mode-Umfärbungen
+   * durch Brave, Chrome, Safari etc.
+   */
+  color-scheme: light;
+
   --bg: #f4f6f8;
   --card: #ffffff;
   --text: #17202a;
@@ -11,21 +18,56 @@
   --shadow: 0 6px 20px rgba(23, 32, 42, .07);
 }
 
+/* =========================
+   GRUNDLEGEND
+   ========================= */
+
 * {
   box-sizing: border-box;
 }
 
 html {
+  /*
+   * Verhindert automatische Textvergrößerung
+   * auf mobilen Browsern.
+   */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+
+  /*
+   * Explizit heller Modus.
+   */
+  color-scheme: light;
+
+  /*
+   * Verhindert horizontales Scrollen.
+   */
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
   color: var(--text);
   background: var(--bg);
+
+  /*
+   * Wichtig für iOS/Android:
+   */
   -webkit-tap-highlight-color: transparent;
+
+  /*
+   * Kein versehentliches horizontales Scrollen.
+   */
+  overflow-x: hidden;
 }
 
 /* =========================
@@ -33,31 +75,44 @@ body {
    ========================= */
 
 header {
-  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-  color: white;
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent-dark)
+  );
+
+  color: #ffffff;
+
   padding: 42px 20px 48px;
 }
 
 .container {
+  width: 100%;
   max-width: 1000px;
   margin: 0 auto;
 }
 
 h1 {
   margin: 0 0 8px;
+
   font-size: clamp(28px, 5vw, 42px);
   line-height: 1.15;
+
+  color: #ffffff;
 }
 
 .subtitle {
   margin: 0;
+
+  color: #ffffff;
   opacity: .88;
+
   font-size: 16px;
   line-height: 1.45;
 }
 
 /* =========================
-   SEARCH
+   SUCHFELD
    ========================= */
 
 .search-wrap {
@@ -68,31 +123,40 @@ h1 {
 #search {
   width: 100%;
   min-height: 54px;
+
   padding: 15px 52px 15px 18px;
 
   border: 0;
   border-radius: 12px;
 
   /*
-   * Wichtig für iPhone/iPad:
-   * Safari zoomt bei Input-Feldern unter 16px
-   * automatisch hinein.
+   * Mindestens 16px verhindert automatisches
+   * Hineinzoomen auf iPhones.
    */
   font-size: 17px;
   line-height: 1.4;
 
+  /*
+   * Explizite Farben verhindern, dass Browser
+   * das Input-Feld eigenständig umfärben.
+   */
+  color: #17202a;
+  background: #ffffff;
+
   outline: none;
-  background: white;
-  color: var(--text);
 
   box-shadow: 0 8px 25px rgba(0, 0, 0, .16);
 
   /*
-   * Verhindert unnötige optische Änderungen
-   * beim Fokussieren auf mobilen Geräten.
+   * Browser-Standard-Styling deaktivieren.
    */
   -webkit-appearance: none;
   appearance: none;
+
+  /*
+   * Dark Mode auch für Inputs verhindern.
+   */
+  color-scheme: light;
 }
 
 #search::placeholder {
@@ -101,6 +165,8 @@ h1 {
 }
 
 #search:focus {
+  outline: none;
+
   box-shadow:
     0 8px 25px rgba(0, 0, 0, .16),
     0 0 0 3px rgba(255, 255, 255, .28);
@@ -108,8 +174,10 @@ h1 {
 
 #clear {
   position: absolute;
-  right: 7px;
+
+  right: 6px;
   top: 50%;
+
   transform: translateY(-50%);
 
   width: 42px;
@@ -117,9 +185,10 @@ h1 {
 
   border: 0;
   border-radius: 50%;
-  background: transparent;
 
+  background: transparent;
   color: #65717d;
+
   font-size: 22px;
   line-height: 1;
 
@@ -128,9 +197,12 @@ h1 {
   display: none;
 
   /*
-   * Verhindert Verzögerungen bei Touch-Geräten.
+   * Schnelle Touch-Reaktion.
    */
   touch-action: manipulation;
+
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 #clear:hover {
@@ -155,10 +227,13 @@ main {
 
 .toolbar {
   display: flex;
+
   justify-content: space-between;
   align-items: center;
+
   gap: 12px;
   flex-wrap: wrap;
+
   margin-bottom: 18px;
 }
 
@@ -169,6 +244,7 @@ main {
 
 .filters {
   display: flex;
+
   gap: 8px;
   flex-wrap: wrap;
 }
@@ -177,18 +253,23 @@ main {
   min-height: 38px;
 
   border: 1px solid var(--border);
-  background: var(--card);
-  color: var(--text);
-
   border-radius: 999px;
+
   padding: 8px 13px;
 
+  background: #ffffff;
+  color: #17202a;
+
   cursor: pointer;
+
   font-size: 14px;
 
   touch-action: manipulation;
+
   -webkit-appearance: none;
   appearance: none;
+
+  color-scheme: light;
 }
 
 .filter:hover {
@@ -201,12 +282,13 @@ main {
 
 .filter.active {
   background: var(--accent);
-  color: white;
+  color: #ffffff;
+
   border-color: var(--accent);
 }
 
 /* =========================
-   RESULTS
+   ERGEBNISSE
    ========================= */
 
 .results {
@@ -215,31 +297,44 @@ main {
 }
 
 .card {
-  background: var(--card);
+  width: 100%;
+  min-width: 0;
+
+  background: #ffffff;
+  color: #17202a;
+
   border: 1px solid var(--border);
   border-radius: 14px;
+
   padding: 18px 20px;
+
   box-shadow: var(--shadow);
 
   /*
-   * Verhindert unnötiges horizontales Überlaufen
-   * bei langen Begriffen.
+   * Verhindert Probleme bei langen Begriffen.
    */
-  min-width: 0;
+  overflow: hidden;
+
+  color-scheme: light;
 }
 
 .top {
   display: flex;
+
   gap: 14px;
+
   align-items: center;
+
   min-width: 0;
 }
 
 .abbr {
   flex: 0 0 auto;
+
   min-width: 68px;
 
   padding: 8px 10px;
+
   border-radius: 9px;
 
   background: var(--accent-soft);
@@ -247,54 +342,78 @@ main {
 
   font-weight: 800;
   text-align: center;
+
   font-size: 17px;
 
+  /*
+   * Abkürzungen nicht auseinanderziehen.
+   */
   white-space: nowrap;
 }
 
 .term {
   min-width: 0;
 
-  font-size: 20px;
-  font-weight: 750;
-  line-height: 1.3;
-
   margin: 0;
 
+  color: #17202a;
+
+  font-size: 20px;
+  font-weight: 750;
+
+  line-height: 1.3;
+
+  /*
+   * Lange Begriffe dürfen umbrechen.
+   */
   overflow-wrap: anywhere;
 }
 
 .tag {
   font-size: 12px;
+
   padding: 4px 8px;
+
   background: #f0f3f5;
-  border-radius: 6px;
   color: #596572;
+
+  border-radius: 6px;
 }
 
 mark {
   background: #fff0a8;
+  color: #17202a;
+
   border-radius: 2px;
+
   padding: 0 1px;
 }
 
 /* =========================
-   EMPTY STATE
+   KEINE TREFFER
    ========================= */
 
 .empty {
-  background: var(--card);
+  background: #ffffff;
+  color: var(--muted);
+
   border: 1px dashed var(--border);
   border-radius: 14px;
+
   padding: 42px 20px;
+
   text-align: center;
-  color: var(--muted);
+
+  color-scheme: light;
 }
 
 .empty strong {
-  color: var(--text);
   display: block;
+
   margin-bottom: 7px;
+
+  color: #17202a;
+
   font-size: 17px;
 }
 
@@ -304,8 +423,11 @@ mark {
 
 footer {
   text-align: center;
+
   color: var(--muted);
+
   font-size: 12px;
+
   padding: 0 20px 30px;
 }
 
@@ -350,13 +472,20 @@ footer {
 
   #search {
     min-height: 52px;
+
     padding: 14px 50px 14px 16px;
+
+    /*
+     * Nicht kleiner als 16px!
+     */
     font-size: 16px;
+
     border-radius: 11px;
   }
 
   #clear {
     right: 5px;
+
     width: 42px;
     height: 42px;
   }
@@ -384,7 +513,9 @@ footer {
 
   .abbr {
     min-width: 55px;
+
     padding: 7px 8px;
+
     font-size: 15px;
   }
 
@@ -432,7 +563,7 @@ footer {
 }
 
 /* =========================
-   GERÄTE MIT TOUCH
+   TOUCH-GERÄTE
    ========================= */
 
 @media (hover: none) and (pointer: coarse) {
@@ -440,10 +571,5 @@ footer {
   #clear {
     touch-action: manipulation;
   }
-
-  .filter:hover,
-  #clear:hover {
-    background: initial;
-  }
 }
-```
+
